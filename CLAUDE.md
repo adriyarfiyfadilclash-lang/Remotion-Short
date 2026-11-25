@@ -14,4 +14,7 @@ Untuk topik sains mikro (molekul, kimia, DNA, genetika, sel), WAJIB pakai gaya d
 ## Gaya baku keempat: ADRIY Exploded View
 Untuk membedah benda buatan manusia (gadget, mesin, alat rumah tangga, kendaraan), WAJIB pakai gaya di `docs/GAYA-ADRIY-EXPLODED-VIEW.md`, termasuk pola gerak kamera tur masuk-keluar untuk video. Pemilik sudah menyetujui bentuk, detail, dan gerak kameranya, jadi pertahankan persis. Pakai ulang `contoh-gaya/exploded/pustaka.tsx`, `detail.tsx`, dan `Tur.tsx`.
 
+## Gaya baku kelima: ADRIY Flat Design 2.0
+Untuk explainer, infografik, dan tips sehari-hari, WAJIB pakai gaya di `docs/GAYA-ADRIY-FLAT-DESIGN.md`: flat yang kaya detail, 2.5D berlapis/isometrik, gradasi lembut, penanda dan kaca pembesar, serta komposisi yang berbeda tiap episode. Jangan kembali ke flat polos. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/flat/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
