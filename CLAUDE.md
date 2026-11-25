@@ -20,4 +20,7 @@ Untuk explainer, infografik, dan tips sehari-hari, WAJIB pakai gaya di `docs/GAY
 ## Gaya baku keenam: ADRIY Mixed Media Documentary
 Untuk sejarah, penemuan, fakta unik, makanan, dan perbandingan bergaya dokumenter, WAJIB pakai gaya di `docs/GAYA-ADRIY-MIXED-MEDIA.md`: kolase editorial dengan arsip asli berstatus domain publik sebagai pusat visual (dicatat di `public/arsip/SUMBER.md`), palet 7 warna dokumenter, dan 5 gerakan (paper reveal, photo drop, draw, typography pop, stamp impact). Jangan pakai ilustrasi kartun. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/mixed/pustaka.tsx`.
 
+## Gaya baku ketujuh: ADRIY Paper Cutout
+Untuk alam, geografi, ekosistem, siklus hidup, dan proses bumi, WAJIB pakai gaya di `docs/GAYA-ADRIY-PAPER-CUTOUT.md`: diorama kertas berlapis yang tampak seperti difoto (bayangan sesuai kedalaman, serat kertas, tepi potongan bercahaya), bukan kartun. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/paper/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
