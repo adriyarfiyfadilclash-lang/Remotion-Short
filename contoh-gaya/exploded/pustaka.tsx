@@ -45,32 +45,63 @@ const Lingkungan: React.FC = () => {
     const pm = new PMREMGenerator(gl);
     scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
     pm.dispose();
+    gl.toneMappingExposure = 1.05;
   }, [gl, scene]);
   return null;
 };
 
-// ExplodedLightingRig3D + ShadowStage3D
+// Semua mesh memberi & menerima bayangan
+const AktifkanBayangan: React.FC = () => {
+  const { scene } = useThree();
+  scene.traverse((o) => {
+    const m = o as unknown as { isMesh?: boolean; castShadow: boolean; receiveShadow: boolean; userData: { tanpaBayangan?: boolean } };
+    if (m.isMesh && !m.userData.tanpaBayangan) {
+      m.castShadow = true;
+      m.receiveShadow = true;
+    }
+  });
+  return null;
+};
+
+// ExplodedLightingRig3D + ShadowStage3D: key light berbayangan, rim dingin & hangat, lantai penerima bayangan
 export const CahayaStudio: React.FC<{ lantaiY: number }> = ({ lantaiY }) => (
   <>
-    <ambientLight intensity={0.25} />
-    <directionalLight position={[4, 6, 5]} intensity={1.6} color="#fff1d6" />
-    <directionalLight position={[-5, 2, -3]} intensity={0.9} color="#8bc9ed" />
-    <spotLight position={[0, 8, 2]} angle={0.5} penumbra={0.8} intensity={60} color="#ffffff" />
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, lantaiY, 0]}>
-      <circleGeometry args={[2.2, 64]} />
-      <meshBasicMaterial color="#0b1723" transparent opacity={0.55} />
+    <AktifkanBayangan />
+    <hemisphereLight args={["#dfefff", "#0b1520", 0.35]} />
+    <directionalLight
+      position={[3.5, 9, 4]}
+      intensity={2.4}
+      color="#fff1d6"
+      castShadow
+      shadow-mapSize-width={2048}
+      shadow-mapSize-height={2048}
+      shadow-camera-left={-5}
+      shadow-camera-right={5}
+      shadow-camera-top={6}
+      shadow-camera-bottom={-6}
+      shadow-camera-near={0.5}
+      shadow-camera-far={30}
+      shadow-bias={-0.0004}
+      shadow-normalBias={0.02}
+    />
+    <directionalLight position={[-6, 3, -4]} intensity={1.3} color="#8bc9ed" />
+    <directionalLight position={[5, 1, -5]} intensity={0.8} color="#ffb870" />
+    <pointLight position={[0, -1, 6]} intensity={8} distance={20} color="#cfe6ff" />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, lantaiY, 0]} receiveShadow userData={{ tanpaBayangan: true }}>
+      <circleGeometry args={[3.2, 64]} />
+      <meshStandardMaterial color="#07101a" roughness={1} metalness={0} />
     </mesh>
-    {[1.4, 2.2].map((r) => (
+    {[1.6, 2.4, 3.2].map((r) => (
       <mesh key={r} rotation={[-Math.PI / 2, 0, 0]} position={[0, lantaiY + 0.005, 0]}>
         <ringGeometry args={[r, r + 0.025, 96]} />
-        <meshBasicMaterial color={CYAN} transparent opacity={0.4} />
+        <meshBasicMaterial color={CYAN} transparent opacity={0.28} />
       </mesh>
     ))}
   </>
 );
 
 export const Kanvas: React.FC<{ k: Kam; children: React.ReactNode }> = ({ k, children }) => (
-  <ThreeCanvas width={W} height={H} camera={{ fov: k.fov, near: 0.1, far: 200 }} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} style={{ position: "absolute", inset: 0 }}>
+  <ThreeCanvas shadows width={W} height={H} camera={{ fov: k.fov, near: 0.1, far: 200 }} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} style={{ position: "absolute", inset: 0 }}>
     <AturKamera k={k} />
     <Lingkungan />
     {children}
@@ -154,18 +185,18 @@ export const Penunjuk: React.FC<{ titik: { x: number; y: number }; no: string; n
   const o = interpolate(t, [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const ty = y ?? titik.y;
   const xUjung = sisi === "kiri" ? 250 : W - 250;
-  const lebar = nama.length * 17 + 30;
+  const lebar = nama.length * 15 + 30;
   return (
     <div style={{ position: "absolute", inset: 0, opacity: o, pointerEvents: "none" }}>
       <svg width={W} height={H} style={{ position: "absolute", inset: 0 }}>
         <polyline points={`${titik.x},${titik.y} ${xUjung + (sisi === "kiri" ? 60 : -60)},${ty} ${xUjung},${ty}`} fill="none" stroke={TERANG} strokeWidth={2} opacity={0.75} />
         <circle cx={titik.x} cy={titik.y} r={6} fill={EMAS} stroke="#07111d" strokeWidth={2} />
       </svg>
-      <div style={{ position: "absolute", top: ty - 30, left: sisi === "kiri" ? xUjung - 60 : xUjung, width: 60, height: 60, borderRadius: 30, background: EMAS, color: "#07111d", display: "grid", placeItems: "center", fontFamily: MONO, fontWeight: 700, fontSize: 26 }}>{no}</div>
+      <div style={{ position: "absolute", top: ty - 27, left: sisi === "kiri" ? xUjung - 54 : xUjung, width: 54, height: 54, borderRadius: 27, background: EMAS, color: "#07111d", display: "grid", placeItems: "center", fontFamily: MONO, fontWeight: 700, fontSize: 24, boxShadow: "0 0 0 4px rgba(232,182,93,0.25)" }}>{no}</div>
       <div
         style={{
-          position: "absolute", top: ty + 36, left: sisi === "kiri" ? Math.max(40, xUjung - lebar + 10) : Math.min(W - 40 - lebar, xUjung - 10),
-          fontFamily: font, fontSize: 26, fontWeight: 700, letterSpacing: 2, color: TERANG, whiteSpace: "nowrap", textAlign: sisi === "kiri" ? "right" : "left", width: lebar,
+          position: "absolute", top: ty + 30, left: sisi === "kiri" ? Math.max(40, xUjung - lebar + 10) : Math.min(W - 40 - lebar, xUjung - 10),
+          fontFamily: font, fontSize: 23, fontWeight: 700, letterSpacing: 1.5, color: TERANG, textShadow: "0 2px 8px #07111d", whiteSpace: "nowrap", textAlign: sisi === "kiri" ? "right" : "left", width: lebar,
         }}
       >
         {nama}
@@ -180,7 +211,7 @@ export const DaftarBagian: React.FC<{ isi: string[]; font: string }> = ({ isi, f
     <div style={{ padding: "10px 20px", background: "rgba(232,182,93,0.12)", borderBottom: "1px solid rgba(139,201,237,0.25)", fontFamily: MONO, fontSize: 20, letterSpacing: 3, color: EMAS }}>DAFTAR BAGIAN</div>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "8px 20px" }}>
       {isi.map((n, i) => (
-        <div key={i} style={{ display: "flex", gap: 14, alignItems: "center", fontSize: 25, color: "#d5e1eb", padding: "6px 0" }}>
+        <div key={i} style={{ display: "flex", gap: 12, alignItems: "center", fontSize: 23, color: "#d5e1eb", padding: "4px 0" }}>
           <span style={{ fontFamily: MONO, color: EMAS, fontWeight: 700 }}>{String(i + 1).padStart(2, "0")}</span>
           {n}
         </div>
