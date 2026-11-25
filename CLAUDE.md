@@ -23,4 +23,7 @@ Untuk sejarah, penemuan, fakta unik, makanan, dan perbandingan bergaya dokumente
 ## Gaya baku ketujuh: ADRIY Paper Cutout
 Untuk alam, geografi, ekosistem, siklus hidup, dan proses bumi, WAJIB pakai gaya di `docs/GAYA-ADRIY-PAPER-CUTOUT.md`: diorama kertas berlapis yang tampak seperti difoto (bayangan sesuai kedalaman, serat kertas, tepi potongan bercahaya), bukan kartun. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/paper/pustaka.tsx`.
 
+## Gaya baku kedelapan: ADRIY Indonesian Wayang
+Untuk wayang, legenda, epos, sejarah kerajaan, dan budaya Nusantara, WAJIB pakai gaya di `docs/GAYA-ADRIY-WAYANG.md`: pertunjukan wayang kulit (kelir, blencong, bayangan, batang pisang) dengan figur wayang ASLI dari foto berstatus domain publik (`public/arsip/wayang/`), bukan wayang gambar sendiri. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/wayang/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
