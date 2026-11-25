@@ -1,0 +1,21 @@
+name: Render Video
+on:
+  workflow_dispatch:
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run cek
+      - name: Render video (3D memakai renderer perangkat lunak)
+        run: npx remotion render Video1 out/video.mp4 --gl=swangle --timeout=120000
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video
+          path: out/video.mp4
+          compression-level: 0

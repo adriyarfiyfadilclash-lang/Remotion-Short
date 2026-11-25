@@ -1,0 +1,213 @@
+{
+  "judulVideo": "Cara Kerja Jantung: 100.000 Detak Sehari",
+  "gaya": "anatomical-3d",
+  "lebar": 1080,
+  "tinggi": 1920,
+  "fps": 30,
+  "detakFrame": 25,
+  "bagian": ["Kenalan", "Ruang", "Aliran", "Katup", "Listrik", "Angka", "Ringkas"],
+  "sumber": "Sumber: NHLBI (NIH), Cleveland Clinic, Merck Manual",
+  "catatan": "Ilustrasi 3D edukasi, bukan model atau saran medis",
+  "adegan": [
+    {
+      "id": "hook",
+      "detik": 6,
+      "bagian": 0,
+      "suasana": "studio-navy",
+      "mode": "hero",
+      "overlay": "counter",
+      "judul": "Jantungmu berdetak...",
+      "sub": "",
+      "detak": true,
+      "sfx": [{ "detik": 0.1, "jenis": "hit" }, { "detik": 1.2, "jenis": "tick" }, { "detik": 2.0, "jenis": "tick" }, { "detik": 2.8, "jenis": "tick" }, { "detik": 3.6, "jenis": "ding" }]
+    },
+    {
+      "id": "tanya",
+      "detik": 7,
+      "bagian": 0,
+      "suasana": "studio-teal",
+      "mode": "putar",
+      "overlay": "none",
+      "maskot": "bingung",
+      "judul": "Kok bisa *tidak pernah capek?*",
+      "sub": "Tonton sampai habis. Jawabannya mengejutkan.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.4, "jenis": "pop" }]
+    },
+    {
+      "id": "ukuran",
+      "detik": 8,
+      "bagian": 0,
+      "suasana": "klinik-terang",
+      "mode": "kecil",
+      "overlay": "kepalan",
+      "judul": "Ukurannya cuma sebesar *kepalan tangan*",
+      "sub": "Kecil, tapi kerjanya luar biasa.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.6, "jenis": "pop" }, { "detik": 3.0, "jenis": "ding" }]
+    },
+    {
+      "id": "letak",
+      "detik": 9,
+      "bagian": 0,
+      "suasana": "klinik-terang",
+      "mode": "dada",
+      "overlay": "torso",
+      "judul": "Letaknya di *tengah dada*, sedikit ke kiri",
+      "sub": "Bukan jauh di sebelah kiri seperti yang sering dikira.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.8, "jenis": "pop" }]
+    },
+    {
+      "id": "ruang",
+      "detik": 10,
+      "bagian": 1,
+      "suasana": "studio-navy",
+      "mode": "bongkar",
+      "overlay": "label4",
+      "judul": "Di dalamnya ada *4 ruang*",
+      "sub": "2 di atas, 2 di bawah.",
+      "sfx": [{ "detik": 0, "jenis": "riser" }, { "detik": 1.5, "jenis": "hit" }, { "detik": 2.4, "jenis": "pop" }, { "detik": 3.6, "jenis": "pop" }, { "detik": 4.8, "jenis": "ding" }]
+    },
+    {
+      "id": "atrium",
+      "detik": 10,
+      "bagian": 1,
+      "suasana": "studio-teal",
+      "mode": "atrium",
+      "overlay": "labelAtas",
+      "judul": "*Atrium* = ruang atas",
+      "sub": "Tugasnya menampung darah yang masuk.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.2, "jenis": "ding" }]
+    },
+    {
+      "id": "ventrikel",
+      "detik": 10,
+      "bagian": 1,
+      "suasana": "studio-navy",
+      "mode": "ventrikel",
+      "overlay": "labelBawah",
+      "judul": "*Ventrikel* = ruang bawah",
+      "sub": "Ruang pompa yang mendorong darah keluar dari jantung.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.2, "jenis": "hit" }]
+    },
+    {
+      "id": "kanan",
+      "detik": 10,
+      "bagian": 2,
+      "suasana": "paru-biru",
+      "mode": "alir-biru",
+      "overlay": "paru",
+      "maskot": "senang",
+      "judul": "Sisi *kanan* mengirim darah ke *paru-paru*",
+      "sub": "Di sana darah mengambil oksigen.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.8, "jenis": "gelembung" }, { "detik": 4.6, "jenis": "gelembung" }]
+    },
+    {
+      "id": "kiri",
+      "detik": 10,
+      "bagian": 2,
+      "suasana": "tubuh-merah",
+      "mode": "alir-merah",
+      "overlay": "tubuh",
+      "judul": "Sisi *kiri* mengirim darah ke *seluruh tubuh*",
+      "sub": "Darah kaya oksigen untuk otot, otak, dan organ lain.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 2.2, "jenis": "ding" }]
+    },
+    {
+      "id": "katup",
+      "detik": 10,
+      "bagian": 3,
+      "suasana": "studio-teal",
+      "mode": "katup",
+      "overlay": "katup",
+      "judul": "*4 katup* = pintu satu arah",
+      "sub": "Darah mengalir ke arah yang benar, tidak berbalik.",
+      "sfx": [{ "detik": 0.4, "jenis": "pop" }, { "detik": 1.8, "jenis": "tick" }, { "detik": 3.2, "jenis": "ding" }]
+    },
+    {
+      "id": "bunyi",
+      "detik": 8,
+      "bagian": 3,
+      "suasana": "studio-navy",
+      "mode": "hero",
+      "overlay": "suara",
+      "judul": "Bunyi *“dug-dug”* berasal dari katup",
+      "sub": "Itu yang didengar dokter lewat stetoskop.",
+      "detak": true,
+      "sfx": []
+    },
+    {
+      "id": "listrik",
+      "detik": 11,
+      "bagian": 4,
+      "suasana": "listrik",
+      "mode": "listrik",
+      "overlay": "ekg",
+      "judul": "Jawabannya: *listrik!*",
+      "sub": "Simpul SA, alat pacu alami jantung, memicu tiap detak.",
+      "sfx": [{ "detik": 0, "jenis": "riser" }, { "detik": 1.6, "jenis": "zap" }, { "detik": 5.4, "jenis": "zap" }]
+    },
+    {
+      "id": "mitos",
+      "detik": 9,
+      "bagian": 4,
+      "suasana": "klinik-terang",
+      "mode": "bawah",
+      "overlay": "mitos",
+      "maskot": "kaget",
+      "judul": "Mitos atau fakta?",
+      "sub": "",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 0.9, "jenis": "pop" }, { "detik": 4.2, "jenis": "ding" }]
+    },
+    {
+      "id": "liter",
+      "detik": 10,
+      "bagian": 5,
+      "suasana": "tubuh-merah",
+      "mode": "kiri",
+      "overlay": "liter",
+      "judul": "Tiap menit: *±5,7 liter* darah",
+      "sub": "Sekitar 4 sendok makan setiap kali berdetak.",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.0, "jenis": "tick" }, { "detik": 1.8, "jenis": "tick" }, { "detik": 3.4, "jenis": "ding" }]
+    },
+    {
+      "id": "bumi",
+      "detik": 8,
+      "bagian": 5,
+      "suasana": "bumi",
+      "mode": "hilang",
+      "overlay": "bumi",
+      "judul": "Pembuluh darahmu *±96.000 km*",
+      "sub": "Cukup untuk mengelilingi Bumi 2 kali!",
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.0, "jenis": "riser" }, { "detik": 3.0, "jenis": "hit" }]
+    },
+    {
+      "id": "ringkas",
+      "detik": 10,
+      "bagian": 6,
+      "suasana": "studio-teal",
+      "mode": "ringkas",
+      "overlay": "ringkasan",
+      "judul": "Ingat *3 hal* ini",
+      "sub": "",
+      "poin": [
+        "4 ruang: atas menampung, bawah memompa",
+        "4 katup: darah mengalir satu arah",
+        "Sinyal listrik memicu setiap detak"
+      ],
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 1.2, "jenis": "pop" }, { "detik": 2.6, "jenis": "pop" }, { "detik": 4.0, "jenis": "ding" }]
+    },
+    {
+      "id": "ajakan",
+      "detik": 9,
+      "bagian": 6,
+      "suasana": "studio-navy",
+      "mode": "cta",
+      "overlay": "cta",
+      "judul": "Coba rasakan *detakmu* sekarang",
+      "sub": "Dewasa sehat umumnya 60–100 kali per menit saat istirahat.",
+      "ajakan": "Tulis di komentar: berapa detakmu per menit?",
+      "ikuti": "Ikuti untuk seri tubuh manusia berikutnya",
+      "detak": true,
+      "sfx": [{ "detik": 0, "jenis": "whoosh" }, { "detik": 2.4, "jenis": "ding" }]
+    }
+  ]
+}
