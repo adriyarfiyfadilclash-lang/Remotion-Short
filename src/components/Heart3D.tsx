@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { ThreeCanvas } from "@remotion/three";
 import { useCurrentFrame } from "remotion";
 import { CatmullRomCurve3, DoubleSide, Vector3 } from "three";
+import { AURIKEL, KORONER, ambilTeksturOtot, geometriAurikel, geometriRuang, kurvaKoroner } from "../lib/bentuk";
 import {
   JALUR_BIRU, JALUR_MERAH, KAMERA, KATUP, LEBAR, NamaRuang, PEMBULUH, RUANG, SIMPUL_AV, SIMPUL_SA, TINGGI, V3,
   ayun, bukaKatup, faseDetak, keadaanPada, posRuang, remasAtrium, remasVentrikel,
@@ -14,10 +15,12 @@ const kurva = (titik: V3[]) => new CatmullRomCurve3(titik.map((p) => new Vector3
 // MedicalStudioLighting: key + fill + rim
 const MedicalStudioLighting: React.FC = () => (
   <>
-    <ambientLight intensity={0.45} />
-    <directionalLight position={[3, 4, 6]} intensity={1.7} color="#fff4ec" />
-    <directionalLight position={[-5, 1, 3]} intensity={0.6} color="#9cc9ff" />
-    <pointLight position={[0, 3, -5]} intensity={40} distance={20} color="#ff8f8f" />
+    <hemisphereLight args={["#fff1ea", "#2a0a12", 0.55]} />
+    <directionalLight position={[3, 4, 6]} intensity={2.1} color="#fff4ec" />
+    <directionalLight position={[-5, 1, 3]} intensity={0.7} color="#9cc9ff" />
+    <directionalLight position={[0, -3, 4]} intensity={0.35} color="#ffd0c0" />
+    <pointLight position={[-2, 3, -4]} intensity={55} distance={20} color="#ff9a9a" />
+    <pointLight position={[3, -1, -4]} intensity={35} distance={20} color="#9cc9ff" />
   </>
 );
 
@@ -37,20 +40,37 @@ const Ruang: React.FC<{ n: NamaRuang; frame: number }> = ({ n, frame }) => {
   const kuat = 0.18 + Math.max(sorot, nyala * 1.4);
   const opas = 1 - 0.68 * k.kaca;
 
+  const tekstur = ambilTeksturOtot();
+  const aurikel = AURIKEL[n];
+  const bahan = (
+    <meshPhysicalMaterial
+      color="#ffffff"
+      vertexColors
+      bumpMap={tekstur ?? undefined}
+      bumpScale={0.9}
+      emissive={kuat > 0.2 ? emisi : "#2a0508"}
+      emissiveIntensity={kuat > 0.2 ? kuat : 0.12}
+      roughness={0.5}
+      metalness={0}
+      clearcoat={0.55}
+      clearcoatRoughness={0.28}
+      transparent
+      opacity={opas}
+      depthWrite={opas > 0.9}
+    />
+  );
+
   return (
-    <mesh position={pos} rotation={[0, 0, r.rotZ]} scale={[r.skala[0] * s, r.skala[1] * s, r.skala[2] * s]}>
-      <sphereGeometry args={[r.r, 48, 48]} />
-      <meshStandardMaterial
-        color={r.warna}
-        emissive={kuat > 0.2 ? emisi : "#3a0a10"}
-        emissiveIntensity={kuat}
-        roughness={0.42}
-        metalness={0.05}
-        transparent
-        opacity={opas}
-        depthWrite={opas > 0.9}
-      />
-    </mesh>
+    <group position={pos}>
+      <mesh rotation={[0, 0, r.rotZ]} scale={[r.skala[0] * s, r.skala[1] * s, r.skala[2] * s]} geometry={geometriRuang(n)}>
+        {bahan}
+      </mesh>
+      {aurikel && (
+        <mesh position={aurikel.pos} rotation={aurikel.rot} scale={s} geometry={geometriAurikel(n)}>
+          {bahan}
+        </mesh>
+      )}
+    </group>
   );
 };
 
@@ -62,8 +82,42 @@ const Pembuluh: React.FC<{ frame: number }> = ({ frame }) => {
     <>
       {PEMBULUH.map((p, i) => (
         <mesh key={i}>
-          <tubeGeometry args={[geo[i], 40, p.r, 16, false]} />
-          <meshStandardMaterial color={p.warna} roughness={0.45} transparent opacity={opas} depthWrite={opas > 0.9} />
+          <tubeGeometry args={[geo[i], 64, p.r, 24, false]} />
+          <meshPhysicalMaterial
+            color={p.warna}
+            roughness={0.42}
+            clearcoat={0.6}
+            clearcoatRoughness={0.25}
+            side={DoubleSide}
+            transparent
+            opacity={opas}
+            depthWrite={opas > 0.9}
+          />
+        </mesh>
+      ))}
+    </>
+  );
+};
+
+// Pembuluh koroner di permukaan jantung (hilang saat jantung dibongkar)
+const Koroner: React.FC<{ frame: number }> = ({ frame }) => {
+  const k = keadaanPada(frame);
+  const opas = Math.max(0, 1 - 1.6 * k.bongkar) * (1 - 0.7 * k.kaca);
+  if (opas < 0.02) return null;
+  return (
+    <>
+      {KORONER.map((p, i) => (
+        <mesh key={i}>
+          <tubeGeometry args={[kurvaKoroner(i), 96, p.r, 10, false]} />
+          <meshPhysicalMaterial
+            color={p.warna}
+            roughness={0.35}
+            clearcoat={0.8}
+            clearcoatRoughness={0.2}
+            transparent
+            opacity={opas}
+            depthWrite={opas > 0.9}
+          />
         </mesh>
       ))}
     </>
@@ -161,6 +215,7 @@ const Jantung: React.FC = () => {
       {(["LA", "RA", "LV", "RV"] as NamaRuang[]).map((n) => (
         <Ruang key={n} n={n} frame={frame} />
       ))}
+      <Koroner frame={frame} />
       <Aliran frame={frame} jalur={JALUR_BIRU} warna="#5b8cff" kuat={k.biru} geser={0} />
       <Aliran frame={frame} jalur={JALUR_MERAH} warna="#ff4d5e" kuat={k.merah} geser={0.5} />
       <Katup frame={frame} />
