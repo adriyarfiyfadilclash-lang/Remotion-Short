@@ -1,14 +1,14 @@
-// Contoh gaya ADRIY Mixed Media (9:16): tiga komposisi kolase berbeda.
+// Contoh gaya ADRIY Mixed Media Documentary (9:16): tiga konsep topik berbeda.
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { Ep1Kamera } from "./Ep1Kamera";
-import { Ep2Kopi } from "./Ep2Kopi";
-import { Ep3Mi } from "./Ep3Mi";
+import { Ep1Cetak } from "./Ep1Cetak";
+import { Ep2Lampu } from "./Ep2Lampu";
+import { Ep3Telur } from "./Ep3Telur";
 
 export const ContohMixed: React.FC = () => (
-  <AbsoluteFill style={{ background: "#D9C3A0" }}>
-    <Sequence durationInFrames={110}><Ep1Kamera /></Sequence>
-    <Sequence from={110} durationInFrames={110}><Ep2Kopi /></Sequence>
-    <Sequence from={220} durationInFrames={110}><Ep3Mi /></Sequence>
+  <AbsoluteFill style={{ background: "#D5C1A1" }}>
+    <Sequence durationInFrames={110}><Ep1Cetak /></Sequence>
+    <Sequence from={110} durationInFrames={110}><Ep2Lampu /></Sequence>
+    <Sequence from={220} durationInFrames={110}><Ep3Telur /></Sequence>
   </AbsoluteFill>
 );
