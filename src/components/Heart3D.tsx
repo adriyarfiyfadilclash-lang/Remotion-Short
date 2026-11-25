@@ -4,9 +4,9 @@ import React, { useMemo } from "react";
 import { ThreeCanvas } from "@remotion/three";
 import { useCurrentFrame } from "remotion";
 import { CatmullRomCurve3, DoubleSide, Vector3 } from "three";
-import { AURIKEL, KORONER, ambilTeksturOtot, geometriAurikel, geometriRuang, kurvaKoroner } from "../lib/bentuk";
+import { KORONER, ambilTeksturOtot, geometriRuang, kurvaKoroner } from "../lib/bentuk";
 import {
-  JALUR_BIRU, JALUR_MERAH, KAMERA, KATUP, LEBAR, NamaRuang, PEMBULUH, RUANG, SIMPUL_AV, SIMPUL_SA, TINGGI, V3,
+  JALUR_BIRU, JALUR_MERAH, KAMERA, SAMBUNGAN, KATUP, LEBAR, NamaRuang, PEMBULUH, RUANG, SIMPUL_AV, SIMPUL_SA, TINGGI, V3,
   ayun, bukaKatup, faseDetak, keadaanPada, posRuang, remasAtrium, remasVentrikel,
 } from "../lib/model";
 
@@ -28,7 +28,7 @@ const Ruang: React.FC<{ n: NamaRuang; frame: number }> = ({ n, frame }) => {
   const k = keadaanPada(frame);
   const r = RUANG[n];
   const remas = r.atas ? remasAtrium(frame) : remasVentrikel(frame);
-  const s = 1 - 0.07 * remas * k.detak;
+  const s = 1 - 0.045 * remas * k.detak;
   const pos = posRuang(n, k.bongkar);
 
   // OrganHighlightEffect: sorot kuning berdenyut
@@ -41,35 +41,28 @@ const Ruang: React.FC<{ n: NamaRuang; frame: number }> = ({ n, frame }) => {
   const opas = 1 - 0.68 * k.kaca;
 
   const tekstur = ambilTeksturOtot();
-  const aurikel = AURIKEL[n];
-  const bahan = (
-    <meshPhysicalMaterial
-      color="#ffffff"
-      vertexColors
-      bumpMap={tekstur ?? undefined}
-      bumpScale={0.9}
-      emissive={kuat > 0.2 ? emisi : "#2a0508"}
-      emissiveIntensity={kuat > 0.2 ? kuat : 0.12}
-      roughness={0.5}
-      metalness={0}
-      clearcoat={0.55}
-      clearcoatRoughness={0.28}
-      transparent
-      opacity={opas}
-      depthWrite={opas > 0.9}
-    />
-  );
+  const pusat = r.pos;
 
+  // Geometri memakai koordinat model; grup luar memindah & menskala di sekitar pusat ruang
   return (
-    <group position={pos}>
-      <mesh rotation={[0, 0, r.rotZ]} scale={[r.skala[0] * s, r.skala[1] * s, r.skala[2] * s]} geometry={geometriRuang(n)}>
-        {bahan}
+    <group position={pos} scale={s}>
+      <mesh position={[-pusat[0], -pusat[1], -pusat[2]]} geometry={geometriRuang(n)}>
+        <meshPhysicalMaterial
+          color="#ffffff"
+          vertexColors
+          bumpMap={tekstur ?? undefined}
+          bumpScale={0.35}
+          emissive={kuat > 0.2 ? emisi : "#2a0508"}
+          emissiveIntensity={kuat > 0.2 ? kuat : 0.12}
+          roughness={0.5}
+          metalness={0}
+          clearcoat={0.55}
+          clearcoatRoughness={0.28}
+          transparent
+          opacity={opas}
+          depthWrite={opas > 0.9}
+        />
       </mesh>
-      {aurikel && (
-        <mesh position={aurikel.pos} rotation={aurikel.rot} scale={s} geometry={geometriAurikel(n)}>
-          {bahan}
-        </mesh>
-      )}
     </group>
   );
 };
@@ -93,6 +86,12 @@ const Pembuluh: React.FC<{ frame: number }> = ({ frame }) => {
             opacity={opas}
             depthWrite={opas > 0.9}
           />
+        </mesh>
+      ))}
+      {SAMBUNGAN.map((b, i) => (
+        <mesh key={`s${i}`} position={b.pos}>
+          <sphereGeometry args={[b.r, 32, 32]} />
+          <meshPhysicalMaterial color={b.warna} roughness={0.42} clearcoat={0.6} clearcoatRoughness={0.25} transparent opacity={opas} depthWrite={opas > 0.9} />
         </mesh>
       ))}
     </>

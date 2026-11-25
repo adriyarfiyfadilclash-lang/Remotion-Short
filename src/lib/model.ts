@@ -13,55 +13,73 @@ export const TINGGI = data.tinggi;
 const DETAK = data.detakFrame; // 25 frame per detak (sekitar 72 kali per menit pada 30 fps)
 
 // ---------- Geometri ruang jantung ----------
+// pos = pusat potongan tiap ruang (dipakai untuk label, detak, dan pembongkaran).
+// Bentuk permukaannya dibuat di lib/bentuk.ts. r/skala/rotZ/warna disimpan untuk keperluan lain.
 export const RUANG: Record<
   NamaRuang,
   { pos: V3; r: number; skala: V3; rotZ: number; warna: string; nama: string; atas: boolean }
 > = {
-  RA: { pos: [-0.62, 0.45, 0.1], r: 0.5, skala: [1, 1, 0.9], rotZ: 0, warna: "#c23a4c", nama: "Atrium kanan", atas: true },
-  LA: { pos: [0.62, 0.6, -0.15], r: 0.46, skala: [1, 1, 0.9], rotZ: 0, warna: "#d4485a", nama: "Atrium kiri", atas: true },
-  RV: { pos: [-0.35, -0.4, 0.3], r: 0.62, skala: [1.05, 1.05, 0.8], rotZ: -0.15, warna: "#b8343f", nama: "Ventrikel kanan", atas: false },
-  LV: { pos: [0.42, -0.5, 0.05], r: 0.66, skala: [0.9, 1.2, 0.85], rotZ: 0.35, warna: "#cc3b47", nama: "Ventrikel kiri", atas: false },
+  RA: { pos: [-0.72, 0.52, 0.12], r: 0.5, skala: [1, 1, 1], rotZ: 0, warna: "#c23a4c", nama: "Atrium kanan", atas: true },
+  LA: { pos: [0.38, 0.66, -0.5], r: 0.46, skala: [1, 1, 1], rotZ: 0, warna: "#d4485a", nama: "Atrium kiri", atas: true },
+  RV: { pos: [-0.08, -0.32, 0.5], r: 0.62, skala: [1, 1, 1], rotZ: 0, warna: "#b8343f", nama: "Ventrikel kanan", atas: false },
+  LV: { pos: [0.5, -0.52, -0.08], r: 0.66, skala: [1, 1, 1], rotZ: 0, warna: "#cc3b47", nama: "Ventrikel kiri", atas: false },
 };
 
+// Warna pembuluh: merah = darah kaya oksigen, biru = darah miskin oksigen (konvensi edukasi)
+const AORTA = "#c8414d";
+const VENA = "#4a5fa8";
+const PULMO = "#5868c4";
+const VPULMO = "#b8404c";
+
+// Titik percabangan trunkus pulmonalis (ditutup bola agar ujung tabung tidak bolong)
+export const SAMBUNGAN: { pos: V3; r: number; warna: string }[] = [{ pos: [0.45, 1.3, -0.05], r: 0.165, warna: PULMO }];
+
 export const PEMBULUH: { titik: V3[]; r: number; warna: string }[] = [
-  // Aorta (ke seluruh tubuh)
-  { titik: [[0.2, 0.35, 0.25], [0.12, 1.25, 0.2], [0.45, 1.7, 0], [0.85, 1.4, -0.25], [0.9, 0.7, -0.4]], r: 0.15, warna: "#c8414d" },
+  // Aorta: naik dari tengah jantung (di belakang arteri pulmonalis), melengkung ke kiri-belakang, lalu turun
+  { titik: [[0.1, 0.4, 0.05], [0.0, 0.9, 0.12], [0.02, 1.4, 0.05], [0.3, 1.78, -0.15], [0.68, 1.62, -0.52], [0.78, 1.0, -0.82], [0.78, 0.0, -0.9]], r: 0.17, warna: AORTA },
   // Cabang lengkung aorta: brakiosefalika, karotis komunis kiri, subklavia kiri
-  { titik: [[0.2, 1.5, 0.14], [0.13, 1.8, 0.16], [0.08, 2.1, 0.18]], r: 0.065, warna: "#c8414d" },
-  { titik: [[0.44, 1.7, 0.02], [0.44, 1.92, 0.02], [0.43, 2.15, 0.02]], r: 0.05, warna: "#c8414d" },
-  { titik: [[0.66, 1.62, -0.1], [0.72, 1.85, -0.12], [0.8, 2.08, -0.14]], r: 0.055, warna: "#c8414d" },
-  // Arteri pulmonalis (ke paru-paru)
-  { titik: [[-0.15, 0.25, 0.5], [-0.05, 1.0, 0.55], [0.35, 1.35, 0.5], [0.8, 1.45, 0.45]], r: 0.14, warna: "#5868c4" },
-  // Cabang arteri pulmonalis kanan (lewat di belakang aorta)
-  { titik: [[0.05, 1.15, 0.45], [-0.25, 1.32, 0.05], [-0.7, 1.35, -0.3], [-1.05, 1.3, -0.4]], r: 0.09, warna: "#5868c4" },
-  // Vena kava superior
-  { titik: [[-0.72, 0.75, 0], [-0.73, 1.25, 0], [-0.74, 1.75, 0]], r: 0.13, warna: "#4a5fa8" },
-  // Vena kava inferior
-  { titik: [[-0.62, 0.0, -0.1], [-0.61, -0.5, -0.15], [-0.6, -1.0, -0.2]], r: 0.14, warna: "#4a5fa8" },
-  // Vena pulmonalis (dari paru-paru)
-  { titik: [[0.95, 0.75, -0.2], [1.15, 0.8, -0.25], [1.35, 0.85, -0.3]], r: 0.075, warna: "#b8404c" },
-  { titik: [[0.9, 0.45, -0.2], [1.1, 0.4, -0.25], [1.3, 0.35, -0.3]], r: 0.075, warna: "#b8404c" },
+  { titik: [[0.08, 1.62, 0.02], [0.0, 1.95, 0.05], [-0.06, 2.25, 0.08]], r: 0.075, warna: AORTA },
+  { titik: [[0.32, 1.84, -0.16], [0.33, 2.05, -0.16], [0.34, 2.28, -0.16]], r: 0.055, warna: AORTA },
+  { titik: [[0.55, 1.78, -0.38], [0.64, 2.0, -0.4], [0.75, 2.22, -0.42]], r: 0.06, warna: AORTA },
+  // Trunkus pulmonalis: keluar dari ventrikel kanan di depan, naik ke kiri-belakang lalu bercabang di bawah lengkung aorta
+  { titik: [[0.04, 0.42, 0.56], [0.22, 0.85, 0.5], [0.38, 1.18, 0.22], [0.45, 1.3, -0.05]], r: 0.17, warna: PULMO },
+  // Arteri pulmonalis kiri
+  { titik: [[0.45, 1.3, -0.05], [0.85, 1.35, -0.25], [1.25, 1.3, -0.4]], r: 0.11, warna: PULMO },
+  // Arteri pulmonalis kanan: lewat di bawah lengkung aorta, di belakang aorta naik dan vena kava superior
+  { titik: [[0.45, 1.3, -0.05], [0.05, 1.32, -0.42], [-0.6, 1.3, -0.5], [-1.25, 1.25, -0.5]], r: 0.11, warna: PULMO },
+  // Vena kava superior: masuk ke atrium kanan dari atas
+  { titik: [[-0.86, 0.7, 0.02], [-0.88, 1.3, -0.02], [-0.9, 2.05, -0.05]], r: 0.15, warna: VENA },
+  // Vena kava inferior: masuk ke atrium kanan dari bawah-belakang
+  { titik: [[-0.8, 0.15, -0.18], [-0.77, -0.3, -0.3], [-0.74, -0.75, -0.35]], r: 0.15, warna: VENA },
+  // Empat vena pulmonalis: masuk ke atrium kiri dari belakang, dua dari tiap paru
+  { titik: [[0.7, 0.8, -0.65], [1.0, 0.86, -0.68], [1.35, 0.9, -0.7]], r: 0.075, warna: VPULMO },
+  { titik: [[0.7, 0.56, -0.65], [1.0, 0.5, -0.68], [1.35, 0.45, -0.7]], r: 0.075, warna: VPULMO },
+  { titik: [[-0.1, 0.8, -0.72], [-0.45, 0.86, -0.78], [-0.8, 0.9, -0.82]], r: 0.075, warna: VPULMO },
+  { titik: [[-0.1, 0.56, -0.72], [-0.45, 0.5, -0.78], [-0.8, 0.45, -0.82]], r: 0.075, warna: VPULMO },
 ];
 
 // Jalur aliran darah (untuk partikel)
+// Biru: vena kava -> atrium kanan -> ventrikel kanan -> trunkus pulmonalis -> paru-paru
 export const JALUR_BIRU: V3[] = [
-  [-0.74, 1.95, 0], [-0.72, 1.0, 0.05], [-0.62, 0.45, 0.15], [-0.45, -0.05, 0.3], [-0.35, -0.45, 0.35],
-  [-0.2, -0.1, 0.45], [-0.15, 0.3, 0.5], [-0.05, 1.0, 0.55], [0.35, 1.35, 0.5], [0.9, 1.5, 0.45], [1.5, 1.7, 0.4],
+  [-0.9, 2.1, -0.05], [-0.88, 1.2, 0.0], [-0.75, 0.55, 0.15], [-0.5, 0.05, 0.4], [-0.25, -0.45, 0.6],
+  [-0.05, -0.15, 0.65], [0.04, 0.4, 0.6], [0.22, 0.85, 0.5], [0.4, 1.2, 0.2], [0.85, 1.35, -0.25], [1.3, 1.3, -0.4],
 ];
+// Merah: vena pulmonalis -> atrium kiri -> ventrikel kiri -> aorta -> tubuh
 export const JALUR_MERAH: V3[] = [
-  [1.6, 0.85, -0.3], [1.0, 0.75, -0.2], [0.62, 0.6, -0.1], [0.5, 0.1, 0.0], [0.42, -0.55, 0.1],
-  [0.3, -0.1, 0.2], [0.2, 0.35, 0.25], [0.12, 1.25, 0.2], [0.45, 1.7, 0], [0.85, 1.4, -0.25], [0.9, 0.6, -0.4],
+  [1.4, 0.88, -0.7], [0.9, 0.82, -0.66], [0.4, 0.68, -0.5], [0.45, 0.15, -0.25], [0.6, -0.6, -0.05],
+  [0.4, -0.2, 0.0], [0.12, 0.4, 0.05], [0.0, 0.95, 0.12], [0.05, 1.45, 0.05], [0.35, 1.78, -0.15], [0.7, 1.55, -0.55], [0.78, 0.6, -0.85],
 ];
 
 export const KATUP: { pos: V3; nama: string; av: boolean }[] = [
-  { pos: [-0.5, -0.02, 0.38], nama: "Trikuspid", av: true },
-  { pos: [-0.14, 0.32, 0.56], nama: "Pulmonal", av: false },
-  { pos: [0.52, 0.1, 0.2], nama: "Mitral", av: true },
-  { pos: [0.2, 0.4, 0.34], nama: "Aorta", av: false },
+  { pos: [-0.5, 0.12, 0.42], nama: "Trikuspid", av: true },
+  { pos: [0.1, 0.52, 0.62], nama: "Pulmonal", av: false },
+  { pos: [0.48, 0.22, -0.28], nama: "Mitral", av: true },
+  { pos: [-0.16, 0.3, 0.12], nama: "Aorta", av: false },
 ];
 
-export const SIMPUL_SA: V3 = [-0.78, 0.8, 0.3];
-export const SIMPUL_AV: V3 = [-0.25, 0.0, 0.38];
+// Simpul SA di pertemuan vena kava superior dengan atrium kanan; simpul AV di dekat sekat bawah atrium
+export const SIMPUL_SA: V3 = [-0.9, 0.82, 0.3];
+export const SIMPUL_AV: V3 = [-0.32, 0.12, 0.35];
 
 // ---------- Detak (HeartBeatAnimation) ----------
 // fase 0..1 dalam satu detak: atrium kontraksi dulu, lalu ventrikel
@@ -166,7 +184,9 @@ export const posRuang = (n: NamaRuang, bongkar: number): V3 => {
   const panjang = Math.hypot(p[0], p[1] - 0.05) || 1;
   const arah: V3 = [p[0] / panjang, (p[1] - 0.05) / panjang, 0];
   const jarak = 0.55 * bongkar;
-  return [p[0] + arah[0] * jarak, p[1] + arah[1] * jarak, p[2] + 0.1 * bongkar];
+  // Atrium kiri ada di belakang; saat dibongkar ditarik ke depan agar terlihat
+  const maju = n === "LA" ? 0.75 : n === "RV" ? 0.05 : 0.2;
+  return [p[0] + arah[0] * jarak, p[1] + arah[1] * jarak, p[2] + maju * bongkar];
 };
 
 // ---------- Proyeksi 3D -> layar (untuk label & garis penunjuk) ----------
