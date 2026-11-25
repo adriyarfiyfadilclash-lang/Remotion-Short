@@ -11,4 +11,7 @@ Untuk topik luar angkasa (planet, bintang, galaksi, astronomi), WAJIB pakai gaya
 ## Gaya baku ketiga: ADRIY Scientific 3D
 Untuk topik sains mikro (molekul, kimia, DNA, genetika, sel), WAJIB pakai gaya di `docs/GAYA-ADRIY-SCIENTIFIC-3D.md`. Pemilik sudah menyetujui bentuk dan detailnya, jadi pertahankan persis. Pakai ulang komponen di `contoh-gaya/scientific/pustaka.tsx`.
 
+## Gaya baku keempat: ADRIY Exploded View
+Untuk membedah benda buatan manusia (gadget, mesin, alat rumah tangga, kendaraan), WAJIB pakai gaya di `docs/GAYA-ADRIY-EXPLODED-VIEW.md`, termasuk pola gerak kamera tur masuk-keluar untuk video. Pemilik sudah menyetujui bentuk, detail, dan gerak kameranya, jadi pertahankan persis. Pakai ulang `contoh-gaya/exploded/pustaka.tsx`, `detail.tsx`, dan `Tur.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
