@@ -26,4 +26,7 @@ Untuk alam, geografi, ekosistem, siklus hidup, dan proses bumi, WAJIB pakai gaya
 ## Gaya baku kedelapan: ADRIY Indonesian Wayang
 Untuk wayang, legenda, epos, sejarah kerajaan, dan budaya Nusantara, WAJIB pakai gaya di `docs/GAYA-ADRIY-WAYANG.md`: pertunjukan wayang kulit (kelir, blencong, bayangan, batang pisang) dengan figur wayang ASLI dari foto berstatus domain publik (`public/arsip/wayang/`), bukan wayang gambar sendiri. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/wayang/pustaka.tsx`.
 
+## Gaya baku kesembilan: ADRIY Documentary Motion
+Untuk dokumenter sinematik tentang peristiwa sejarah, bencana bersejarah, penjelajahan, dan tokoh, WAJIB pakai gaya di `docs/GAYA-ADRIY-DOCUMENTARY-MOTION.md`: satu foto arsip asli berstatus domain publik layar penuh dengan Ken Burns, color grade, efek film, judul bab, cap tanggal, lower third, subtitle, dan kredit. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/dokumenter/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
