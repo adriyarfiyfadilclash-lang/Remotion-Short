@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#18232c"/><stop offset=".55" stop-color="#66717a"/><stop offset="1" stop-color="#d0bda0"/></linearGradient>
+ <linearGradient id="ground" x2="0" y2="1"><stop stop-color="#46504c"/><stop offset="1" stop-color="#171e20"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1920" height="1080" fill="url(#sky)"/>
+<circle cx="1450" cy="280" r="125" fill="#e8c99b" opacity=".45" filter="url(#blur)"/>
+<path d="M0 670 L280 440 520 640 810 390 1120 650 1410 420 1700 630 1920 480 1920 1080 0 1080Z" fill="#35434a"/>
+<path d="M0 780 L300 650 590 760 900 590 1200 770 1510 620 1920 760 1920 1080 0 1080Z" fill="url(#ground)"/>
+<path d="M0 850 Q450 760 900 850 T1920 820 L1920 1080 0 1080Z" fill="#202a29"/>
+<g opacity=".45" fill="#11191b">
+ <rect x="250" y="610" width="18" height="210"/><rect x="285" y="650" width="12" height="170"/>
+ <rect x="1330" y="560" width="22" height="230"/><rect x="1370" y="600" width="13" height="190"/>
+ <path d="M220 610h120l-25-35h-70zM1300 560h100l-20-35h-60z"/>
+</g>
+<g fill="#d8c6a7" opacity=".55" font-family="Georgia,serif">
+ <text x="95" y="130" font-size="24" letter-spacing="8">ADRIY DOCUMENTARY SERIES</text>
+</g>
+</svg>

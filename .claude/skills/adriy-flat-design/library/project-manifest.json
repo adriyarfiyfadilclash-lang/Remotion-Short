@@ -1,0 +1,18 @@
+{
+  "project": "ADRIY Flat Design Final Project",
+  "modules_included": [
+    "flat-animation",
+    "flat-transition",
+    "flat-typography",
+    "flat-shapes-icons",
+    "flat-infographics",
+    "flat-effects-motion"
+  ],
+  "missing_modules": [],
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "status": "assembled_not_render_tested"
+}

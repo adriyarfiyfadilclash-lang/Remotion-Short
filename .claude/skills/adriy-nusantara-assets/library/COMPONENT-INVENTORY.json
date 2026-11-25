@@ -1,0 +1,18 @@
+{
+  "style": "Indonesian Traditional Wayang Motion",
+  "stage": 4,
+  "module": "Nusantara Historical Assets",
+  "components": [
+    "GununganAsset",
+    "KeratonAsset",
+    "CandiAsset",
+    "NusantaraShipAsset",
+    "TraditionalWeaponAsset",
+    "RoyalBannerAsset",
+    "HistoricalVillageAsset"
+  ],
+  "composition": "NusantaraAssetsShowcase",
+  "resolution": "1920x1080",
+  "fps": 30,
+  "durationInFrames": 150
+}

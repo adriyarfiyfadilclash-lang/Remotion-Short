@@ -1,0 +1,24 @@
+{
+  "name": "adriy-anatomical-3d-final-project-library",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tahap 7 proyek final pustaka animasi anatomi 3D ADRIY.PROJECT.",
+  "scripts": {
+    "start": "remotion studio src/entry.tsx",
+    "render": "remotion render src/entry.tsx AnatomicalFinalProjectShowcase out/anatomical-final-project.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "remotion": "^4.0.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.120.4",
+    "three": "^0.170.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/three": "^0.170.0",
+    "typescript": "^5.6.0"
+  }
+}

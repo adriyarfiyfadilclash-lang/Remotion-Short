@@ -1,0 +1,50 @@
+{
+  "project": "ADRIY Indonesian Wayang Final Project",
+  "modules": [
+    {
+      "stage": 1,
+      "name": "Indonesian-Wayang-Animation-Library",
+      "directory": "src/Animation"
+    },
+    {
+      "stage": 2,
+      "name": "Indonesian-Wayang-Transition-Library",
+      "directory": "src/Transition"
+    },
+    {
+      "stage": 3,
+      "name": "Indonesian-Historical-Calligraphy-Library",
+      "directory": "src/Typography"
+    },
+    {
+      "stage": 4,
+      "name": "Nusantara-Historical-Assets-Library",
+      "directory": "src/Assets"
+    },
+    {
+      "stage": 5,
+      "name": "Wayang-Camera-Lighting-Library",
+      "directory": "src/CameraLighting"
+    },
+    {
+      "stage": 6,
+      "name": "Wayang-Effects-Library",
+      "directory": "src/Effects"
+    }
+  ],
+  "mainComposition": {
+    "id": "WayangFinalShowcase",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationInFrames": 930
+  },
+  "showcases": [
+    "WayangAnimationShowcase.tsx",
+    "WayangTransitionShowcase.tsx",
+    "HistoricalCalligraphyShowcase.tsx",
+    "NusantaraAssetsShowcase.tsx",
+    "WayangCameraLightingShowcase.tsx",
+    "WayangEffectsShowcase.tsx"
+  ]
+}

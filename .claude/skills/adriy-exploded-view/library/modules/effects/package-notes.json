@@ -1,0 +1,13 @@
+{
+  "module": "Exploded View Effects",
+  "components": 7,
+  "dependencies": [
+    "react",
+    "remotion",
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei",
+    "@remotion/three"
+  ],
+  "status": "source assembled; not runtime tested"
+}

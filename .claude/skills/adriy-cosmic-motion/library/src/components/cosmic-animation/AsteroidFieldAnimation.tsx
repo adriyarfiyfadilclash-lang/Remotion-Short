@@ -1,0 +1,6 @@
+import React from "react";
+import {useCurrentFrame} from "remotion";
+import * as THREE from "three";
+export type AsteroidFieldAnimationProps={count?:number;bounds?:[number,number,number];speed?:number;seed?:number;startFrame?:number;size?:number;color?:THREE.ColorRepresentation};
+/** Seeded asteroid field drifts continuously across the scene. */
+export const AsteroidFieldAnimation:React.FC<AsteroidFieldAnimationProps>=({count=70,bounds=[24,12,16],speed=.12,seed=29,startFrame=0,size=.16,color="#8b929e"})=>{const frame=useCurrentFrame();const items=React.useMemo(()=>{let s=seed>>>0;const rnd=()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};return Array.from({length:Math.max(1,count)},()=>({x:(rnd()-.5)*bounds[0],y:(rnd()-.5)*bounds[1],z:(rnd()-.5)*bounds[2],r:.45+rnd()*1.8,phase:rnd()*Math.PI*2}));},[count,bounds[0],bounds[1],bounds[2],seed]);const t=Math.max(0,frame-startFrame);return <group>{items.map((a,i)=>{const x=THREE.MathUtils.euclideanModulo(a.x+t*speed+bounds[0]/2,bounds[0])-bounds[0]/2;return <mesh key={i} position={[x,a.y+Math.sin(t*.012+a.phase)*.18,a.z]} rotation={[t*.003*a.r,a.phase+t*.004,t*.002]}><dodecahedronGeometry args={[size*a.r,0]}/><meshStandardMaterial color={color} roughness={1} flatShading/></mesh>;})}</group>;};

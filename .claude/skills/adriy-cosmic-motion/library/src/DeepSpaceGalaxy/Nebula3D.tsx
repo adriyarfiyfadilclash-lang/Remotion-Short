@@ -1,0 +1,7 @@
+import React,{useMemo} from "react";\nimport * as THREE from "three";
+/** Kabut nebula prosedural berbentuk awan partikel berwarna. */
+export type Nebula3DProps={count?:number;radius?:number;seed?:number;colorA?:string;colorB?:string;opacity?:number;scale?:[number,number,number]};
+export const Nebula3D:React.FC<Nebula3DProps>=({count=1800,radius=2.2,seed=41,colorA="#6c4db5",colorB="#e477a8",opacity=.42,scale=[1.7,.75,1]})=>{
+ const data=useMemo(()=>{const ca=new THREE.Color(colorA),cb=new THREE.Color(colorB);let s=seed>>>0;const rand=()=>{s=(1664525*s+1013904223)>>>0;return s/4294967296;};const p:number[]=[],c:number[]=[];for(let i=0;i<count;i++){const a=rand()*Math.PI*2,r=Math.pow(rand(),.55)*radius,y=(rand()-.5)*radius*.55;p.push(Math.cos(a)*r,y,Math.sin(a)*r);const t=rand(),cc=ca.clone().lerp(cb,t);c.push(cc.r,cc.g,cc.b);}return {p:new Float32Array(p),c:new Float32Array(c)};},[count,radius,seed,colorA,colorB]);
+ return <points scale={scale}><bufferGeometry><bufferAttribute attach="attributes-position" args={[data.p,3]}/><bufferAttribute attach="attributes-color" args={[data.c,3]}/></bufferGeometry><pointsMaterial vertexColors transparent opacity={opacity} size={.075} sizeAttenuation depthWrite={false}/></points>;
+};

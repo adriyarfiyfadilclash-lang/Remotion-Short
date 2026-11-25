@@ -1,0 +1,22 @@
+{
+  "name": "adriy-scientific-3d-final-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio src/Root.tsx",
+    "render": "remotion render src/Root.tsx Scientific3DFinalProject out/scientific-3d-final.mp4"
+  },
+  "dependencies": {
+    "@remotion/three": "*",
+    "@react-three/drei": "*",
+    "@react-three/fiber": "*",
+    "react": "*",
+    "react-dom": "*",
+    "remotion": "*",
+    "three": "*"
+  },
+  "devDependencies": {
+    "@remotion/cli": "*",
+    "typescript": "*"
+  }
+}

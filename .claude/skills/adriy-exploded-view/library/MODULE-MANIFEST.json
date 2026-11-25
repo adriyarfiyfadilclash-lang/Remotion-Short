@@ -1,0 +1,44 @@
+{
+  "project": "ADRIY Exploded View",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "animation",
+      "path": "modules/animation",
+      "source": "ADRIY-Exploded-View-Animation-Library"
+    },
+    {
+      "id": "transition",
+      "path": "modules/transition",
+      "source": "ADRIY-Exploded-View-Transition-Library"
+    },
+    {
+      "id": "typography",
+      "path": "modules/typography",
+      "source": "ADRIY-Exploded-View-Typography-Library"
+    },
+    {
+      "id": "components-assembly",
+      "path": "modules/components-assembly",
+      "source": "ADRIY-Exploded-View-Components-Assembly-Library"
+    },
+    {
+      "id": "camera-lighting",
+      "path": "modules/camera-lighting",
+      "source": "ADRIY-Exploded-View-Camera-Lighting-Library"
+    },
+    {
+      "id": "effects",
+      "path": "modules/effects",
+      "source": "ADRIY-Exploded-View-Effects-Library"
+    }
+  ],
+  "showcase": {
+    "composition_id": "ExplodedViewFinalShowcase",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration_in_frames": 240
+  },
+  "status": "integrated source project; not runtime tested"
+}

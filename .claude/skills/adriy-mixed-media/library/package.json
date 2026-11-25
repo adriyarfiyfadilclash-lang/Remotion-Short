@@ -1,0 +1,16 @@
+{
+  "name": "adriy-mixed-media-final-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Integrasi akhir 6 pustaka Mixed Media ADRIY.PROJECT",
+  "scripts": {
+    "start": "remotion studio src/entry.tsx",
+    "render": "remotion render src/entry.tsx MixedMediaFinalShowcase out/mixed-media-final.mp4"
+  },
+  "dependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "remotion": "*",
+    "@remotion/cli": "*"
+  }
+}

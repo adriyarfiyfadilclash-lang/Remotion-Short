@@ -1,0 +1,25 @@
+{
+  "name": "adriy-cosmic-motion-cosmic-final-project",
+  "version": "0.8.0",
+  "private": true,
+  "description": "Tahap 7 pustaka animasi kosmik ADRIY Cosmic Motion.",
+  "scripts": {
+    "start": "remotion studio src/entry.tsx",
+    "render": "remotion render src/entry.tsx CosmicPhysicsShowcase out/cosmic-physics.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "remotion": "^4.0.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.114.3",
+    "three": "^0.169.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@remotion/three": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/three": "^0.170.0",
+    "typescript": "^5.6.0"
+  }
+}

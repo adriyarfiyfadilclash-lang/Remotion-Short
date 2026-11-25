@@ -1,0 +1,26 @@
+{
+  "name": "adriy-flat-design-final-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "render:animation": "remotion render src/index.ts FlatAnimationShowcase out/flat-animation.mp4",
+    "render:transition": "remotion render src/index.ts FlatTransitionShowcase out/flat-transition.mp4",
+    "render:typography": "remotion render src/index.ts FlatTypographyShowcase out/flat-typography.mp4",
+    "render:shapes": "remotion render src/index.ts FlatShapesIconsShowcase out/flat-shapes-icons.mp4",
+    "render:infographics": "remotion render src/index.ts FlatInfographicsShowcase out/flat-infographics.mp4",
+    "render:effects": "remotion render src/index.ts FlatEffectsMotionShowcase out/flat-effects-motion.mp4",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.4.0"
+  }
+}

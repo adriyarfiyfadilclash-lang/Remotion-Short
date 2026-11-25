@@ -1,0 +1,53 @@
+{
+  "animation": [
+    "PaperDrop.tsx",
+    "PaperFlip.tsx",
+    "PaperFloat.tsx",
+    "PaperLayer.tsx",
+    "PaperSlide.tsx",
+    "PaperStack.tsx",
+    "PaperTearReveal.tsx"
+  ],
+  "transition": [
+    "PaperCollageSwap.tsx",
+    "PaperFoldTransition.tsx",
+    "PaperPageTurn.tsx",
+    "PaperPeelReveal.tsx",
+    "PaperShutter.tsx",
+    "PaperWipe.tsx"
+  ],
+  "typography": [
+    "PaperLetterByLetter.tsx",
+    "PaperLowerThird.tsx",
+    "PaperParagraph.tsx",
+    "PaperQuoteCard.tsx",
+    "PaperTitle.tsx",
+    "PaperWordHighlight.tsx"
+  ],
+  "shapes-elements": [
+    "PaperArrow.tsx",
+    "PaperBlob.tsx",
+    "PaperCollage.tsx",
+    "PaperShape.tsx",
+    "PaperSymbol.tsx",
+    "PaperTornEdge.tsx"
+  ],
+  "infographics": [
+    "PaperBarChart.tsx",
+    "PaperComparison.tsx",
+    "PaperDonutChart.tsx",
+    "PaperProgressSteps.tsx",
+    "PaperStatCard.tsx",
+    "PaperTimeline.tsx"
+  ],
+  "texture-effects": [
+    "PaperAged.tsx",
+    "PaperFiber.tsx",
+    "PaperFold.tsx",
+    "PaperGrain.tsx",
+    "PaperLightLeak.tsx",
+    "PaperRoughEdge.tsx",
+    "PaperShadow.tsx",
+    "PaperTextureLayer.tsx"
+  ]
+}

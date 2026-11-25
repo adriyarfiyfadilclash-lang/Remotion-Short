@@ -1,0 +1,29 @@
+{
+  "name": "adriy-realistic-3d-final-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "render:animation": "remotion render src/index.tsx Realistic3D-Animation out/animation.mp4",
+    "render:transitions": "remotion render src/index.tsx Realistic3D-Transitions out/transitions.mp4",
+    "render:typography": "remotion render src/index.tsx Realistic3D-Typography out/typography.mp4",
+    "render:objects": "remotion render src/index.tsx Realistic3D-Objects-Materials out/objects-materials.mp4",
+    "render:camera": "remotion render src/index.tsx Realistic3D-Camera-Lighting out/camera-lighting.mp4",
+    "render:environment": "remotion render src/index.tsx Realistic3D-Environment-FX out/environment-fx.mp4"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.17.10",
+    "@remotion/three": "^4.0.300",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.300",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/three": "^0.170.0",
+    "typescript": "^5.7.2"
+  }
+}

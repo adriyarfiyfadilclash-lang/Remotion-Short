@@ -1,0 +1,56 @@
+{
+  "Animation": [
+    "CollageCard",
+    "DepthStack",
+    "FloatingMedia",
+    "MixedMediaFrame",
+    "MixedMediaScene",
+    "PaperLayer",
+    "PhotoCutout"
+  ],
+  "Transition": [
+    "CollageScatterTransition",
+    "HalftoneWipeTransition",
+    "MixedMediaGlitchTransition",
+    "PaperRevealTransition",
+    "PhotoSlideTransition",
+    "SplitPanelTransition",
+    "TapePeelTransition"
+  ],
+  "Typography": [
+    "ArchiveLabel",
+    "CutoutLetter",
+    "EditorialTitle",
+    "HandwrittenNote",
+    "KineticWord",
+    "TypewriterCaption",
+    "VerticalSideNote"
+  ],
+  "Assets": [
+    "CollagePin",
+    "LayeredCutout",
+    "MaskingTape",
+    "PhotoContactSheet",
+    "PolaroidFrame",
+    "StickerCutout",
+    "TornPaperAsset"
+  ],
+  "CameraLighting": [
+    "CameraFlash",
+    "DepthOfFieldOverlay",
+    "MixedMediaCameraRig",
+    "ParallaxLayer",
+    "RimLightEdge",
+    "SoftboxLight",
+    "SpotlightFocus"
+  ],
+  "Effects": [
+    "ChromaticOffset",
+    "DustParticleField",
+    "FilmGrainOverlay",
+    "GlitchSliceOverlay",
+    "InkBleedOverlay",
+    "LightLeakOverlay",
+    "SoftVignette"
+  ]
+}

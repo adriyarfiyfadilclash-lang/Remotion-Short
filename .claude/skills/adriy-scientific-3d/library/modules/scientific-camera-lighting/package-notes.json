@@ -1,0 +1,14 @@
+{
+  "module": "Scientific Camera & Lighting",
+  "style": "Scientific 3D",
+  "components": 7,
+  "dependencies": [
+    "react",
+    "remotion",
+    "three",
+    "@react-three/fiber",
+    "@remotion/three"
+  ],
+  "status": "source assembled; not runtime tested",
+  "note": "Use only one camera controller at a time in a scene"
+}

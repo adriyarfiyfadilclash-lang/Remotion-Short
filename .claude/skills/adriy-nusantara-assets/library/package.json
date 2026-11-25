@@ -1,0 +1,13 @@
+{
+  "name": "adriy-nusantara-historical-assets-library",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio src/entry.tsx",
+    "render": "remotion render src/entry.tsx NusantaraAssetsShowcase out/nusantara-assets-showcase.mp4"
+  },
+  "dependencies": {
+    "react": "*",
+    "remotion": "*"
+  }
+}

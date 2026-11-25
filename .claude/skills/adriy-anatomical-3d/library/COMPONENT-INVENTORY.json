@@ -1,0 +1,57 @@
+{
+  "project": "ADRIY Anatomical 3D",
+  "stage": 7,
+  "stage_name": "Anatomical Final Project",
+  "included_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "components": [
+    {
+      "name": "AnatomicalScene3D",
+      "file": "src/FinalProject/AnatomicalScene3D.tsx"
+    },
+    {
+      "name": "AnatomicalSequenceDirector",
+      "file": "src/FinalProject/AnatomicalSequenceDirector.tsx"
+    },
+    {
+      "name": "OrganFocusSequence",
+      "file": "src/FinalProject/OrganFocusSequence.tsx"
+    },
+    {
+      "name": "MedicalExplainerScene",
+      "file": "src/FinalProject/MedicalExplainerScene.tsx"
+    },
+    {
+      "name": "DissectionExplainerScene",
+      "file": "src/FinalProject/DissectionExplainerScene.tsx"
+    },
+    {
+      "name": "AnatomicalTitleCard",
+      "file": "src/FinalProject/AnatomicalTitleCard.tsx"
+    },
+    {
+      "name": "AnatomicalFinalComposition",
+      "file": "src/FinalProject/AnatomicalFinalComposition.tsx"
+    }
+  ],
+  "showcase": {
+    "id": "AnatomicalFinalProjectShowcase",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationInFrames": 210
+  },
+  "verification": {
+    "npm_install": "not_run",
+    "typescript": "not_run",
+    "remotion_studio": "not_run",
+    "mp4_render": "not_run"
+  }
+}

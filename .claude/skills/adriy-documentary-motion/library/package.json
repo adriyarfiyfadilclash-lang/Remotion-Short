@@ -1,0 +1,22 @@
+{
+  "name": "adriy-documentary-motion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ADRIY Documentary Motion - reusable Remotion component library and demo film",
+  "scripts": {
+    "start": "remotion studio src/index.tsx",
+    "preview": "remotion studio src/index.tsx",
+    "render": "remotion render src/index.tsx DocumentaryFilm out/documentary-film.mp4",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "remotion": "4.0.300"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.300",
+    "@types/react": "18.2.79",
+    "typescript": "5.4.5"
+  }
+}

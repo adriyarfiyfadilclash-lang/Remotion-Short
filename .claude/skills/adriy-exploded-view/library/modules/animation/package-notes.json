@@ -1,0 +1,12 @@
+{
+  "module": "Exploded View Animation",
+  "components": 7,
+  "dependencies": [
+    "react",
+    "remotion",
+    "three",
+    "@react-three/fiber",
+    "@remotion/three"
+  ],
+  "status": "source assembled; not runtime tested"
+}

@@ -1,0 +1,43 @@
+{
+  "project": "ADRIY Realistic 3D Final Project",
+  "modules": [
+    {
+      "directory": "animation",
+      "description": "Realistic 3D animation"
+    },
+    {
+      "directory": "transitions",
+      "description": "Realistic 3D transitions"
+    },
+    {
+      "directory": "typography",
+      "description": "Realistic 3D typography"
+    },
+    {
+      "directory": "objects-materials",
+      "description": "3D objects and materials"
+    },
+    {
+      "directory": "camera-lighting",
+      "description": "3D camera and lighting"
+    },
+    {
+      "directory": "environment-fx",
+      "description": "3D environment and effects"
+    }
+  ],
+  "showcases": [
+    "Realistic3D-Animation",
+    "Realistic3D-Transitions",
+    "Realistic3D-Typography",
+    "Realistic3D-Objects-Materials",
+    "Realistic3D-Camera-Lighting",
+    "Realistic3D-Environment-FX"
+  ],
+  "composition": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "verification": "Assembled only; npm install, typecheck, studio, and render not run."
+}

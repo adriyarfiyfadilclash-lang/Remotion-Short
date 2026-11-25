@@ -1,0 +1,6 @@
+import React from "react";
+import {useCurrentFrame} from "remotion";
+import * as THREE from "three";
+export type SolarSystemAnimationProps={orbitRadii?:number[];planetSizes?:number[];colors?:THREE.ColorRepresentation[];speeds?:number[];tilt?:number;sunSize?:number};
+/** Configurable miniature solar system with orbital tracks and moving planets. */
+export const SolarSystemAnimation:React.FC<SolarSystemAnimationProps>=({orbitRadii=[2.2,3.4,4.8,6.4],planetSizes=[.18,.28,.36,.3],colors=["#aaa","#e5b66b","#4e9ddd","#d66f4a"],speeds=[.035,.022,.014,.009],tilt=.12,sunSize=.72})=>{const f=useCurrentFrame();return <group rotation={[tilt,0,0]}><mesh><sphereGeometry args={[sunSize,32,32]}/><meshBasicMaterial color="#ffd36e"/></mesh><pointLight color="#ffca68" intensity={3.5} distance={30}/>{orbitRadii.map((r,i)=>{const a=f*(speeds[i]??.01)+i*1.7;return <group key={i}><mesh rotation={[Math.PI/2,0,0]}><ringGeometry args={[r-.006,r+.006,96]}/><meshBasicMaterial color="#59718f" transparent opacity={.38} side={THREE.DoubleSide}/></mesh><mesh position={[Math.cos(a)*r,0,Math.sin(a)*r]}><sphereGeometry args={[planetSizes[i]??.25,24,24]}/><meshStandardMaterial color={colors[i]??"#7ba7c9"} roughness={.75}/></mesh></group>;})}</group>;};

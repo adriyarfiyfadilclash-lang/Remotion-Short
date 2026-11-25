@@ -1,0 +1,4 @@
+import React from "react";
+export type Planet3DProps={radius?:number;color?:string;position?:[number,number,number];rotationY?:number;frame?:number;rotationSpeed?:number;roughness?:number;metalness?:number;emissive?:string;emissiveIntensity?:number;segments?:number};
+/** Model planet dengan rotasi berbasis nomor frame. */
+export const Planet3D:React.FC<Planet3DProps>=({radius=1,color="#4b8fc7",position=[0,0,0],rotationY=0,frame=0,rotationSpeed=0.01,roughness=0.8,metalness=0.05,emissive="#000000",emissiveIntensity=0,segments=48})=><mesh position={position} rotation={[0,rotationY+frame*rotationSpeed,0]}><sphereGeometry args={[radius,segments,Math.max(16,Math.floor(segments*.66))]}/><meshStandardMaterial color={color} roughness={roughness} metalness={metalness} emissive={emissive} emissiveIntensity={emissiveIntensity}/></mesh>;
