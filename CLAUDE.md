@@ -17,4 +17,7 @@ Untuk membedah benda buatan manusia (gadget, mesin, alat rumah tangga, kendaraan
 ## Gaya baku kelima: ADRIY Flat Design 2.0
 Untuk explainer, infografik, dan tips sehari-hari, WAJIB pakai gaya di `docs/GAYA-ADRIY-FLAT-DESIGN.md`: flat yang kaya detail, 2.5D berlapis/isometrik, gradasi lembut, penanda dan kaca pembesar, serta komposisi yang berbeda tiap episode. Jangan kembali ke flat polos. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/flat/pustaka.tsx`.
 
+## Gaya baku keenam: ADRIY Mixed Media Documentary
+Untuk sejarah, penemuan, fakta unik, makanan, dan perbandingan bergaya dokumenter, WAJIB pakai gaya di `docs/GAYA-ADRIY-MIXED-MEDIA.md`: kolase editorial dengan arsip asli berstatus domain publik sebagai pusat visual (dicatat di `public/arsip/SUMBER.md`), palet 7 warna dokumenter, dan 5 gerakan (paper reveal, photo drop, draw, typography pop, stamp impact). Jangan pakai ilustrasi kartun. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/mixed/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
