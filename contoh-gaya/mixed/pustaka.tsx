@@ -2,7 +2,7 @@
 // (PaperLayer, CollageCard, PhotoCutout, DepthStack, FloatingMedia, tipografi & efek kolase).
 // Tekstur kertas, grain, dan tepi sobek dibuat dengan filter SVG; "foto" berupa ilustrasi duotone/halftone buatan sendiri.
 import React from "react";
-import { continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig, spring } from "remotion";
+import { Img, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig, spring } from "remotion";
 import { FONT } from "../../src/components/Teks";
 
 export const W = 1080, H = 1920;
@@ -279,4 +279,43 @@ export const useStampImpact = (tunda: number) => {
   const p = spring({ frame: t, fps, config: { damping: 11, mass: 0.6, stiffness: 200 } });
   const getar = t > 0 && t < 8 ? Math.sin(t * 3) * (8 - t) * 0.8 : 0;
   return { skala: t < 0 ? 2.2 : Math.max(0.92, 1 + (1 - p) * 1.2), opacity: t < 0 ? 0 : Math.min(1, t / 2) * 0.92, getar };
+};
+
+// =================== ARSIP ASLI ===================
+// Cetakan arsip (gravir, gambar paten, poster lama) ditempel di kertas karton dengan Photo Drop.
+// Gambar dari public/arsip — lihat public/arsip/SUMBER.md untuk lisensi.
+export const Arsip: React.FC<{
+  src: string; x: number; y: number; w: number; rasio: number; tunda: number; rot?: number; bingkai?: number; warnaBingkai?: string;
+  keterangan?: string; kredit?: string; children?: React.ReactNode; filter?: string;
+}> = ({ src, x, y, w, rasio, tunda, rot = 0, bingkai = 22, warnaBingkai = "#F3ECE0", keterangan, kredit, children, filter = "sepia(0.18) contrast(1.04)" }) => {
+  const g = usePhotoDrop(tunda, rot, Math.round(x + y));
+  const h = w / rasio;
+  return (
+    <div style={{ position: "absolute", left: x - bingkai, top: y - bingkai, width: w + bingkai * 2, transform: g.transform, opacity: g.opacity, zIndex: 8 }}>
+      <div style={{ background: warnaBingkai, padding: bingkai, paddingBottom: keterangan ? bingkai + 46 : bingkai, boxShadow: `0 ${22 * g.bayang}px ${34 * g.bayang}px rgba(37,37,37,0.34), 0 2px 0 rgba(37,37,37,0.12)`, position: "relative" }}>
+        <div style={{ position: "relative", width: w, height: h, overflow: "hidden" }}>
+          <Img src={staticFile(src)} style={{ width: "100%", height: "100%", objectFit: "cover", filter, display: "block" }} />
+          <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 60px rgba(56,39,31,0.25)" }} />
+          <svg width={w} height={h} style={{ position: "absolute", inset: 0, mixBlendMode: "multiply", opacity: 0.35 }}>
+            <rect width={w} height={h} fill="#000" filter="url(#seratKertas)" />
+          </svg>
+          {children}
+        </div>
+        {keterangan && (
+          <div style={{ position: "absolute", left: bingkai, right: bingkai, bottom: 12, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: F.serif }}>
+            <span style={{ fontStyle: "italic", fontWeight: 700, fontSize: 24, color: "#38271F" }}>{keterangan}</span>
+            {kredit && <span style={{ fontFamily: F.sans, fontSize: 17, color: "#6B5E52" }}>{kredit}</span>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Pin bernomor gaya museum (dipasang di atas arsip, koordinat layar)
+export const PinMuseum: React.FC<{ x: number; y: number; n: number; tunda: number; warna?: string }> = ({ x, y, n, tunda, warna = C.merah }) => {
+  const st = useStampImpact(tunda);
+  return (
+    <div style={{ position: "absolute", left: x - 22, top: y - 22, width: 44, height: 44, borderRadius: 22, background: warna, color: "#fff", border: "3px solid #F3ECE0", boxShadow: "0 4px 10px rgba(37,37,37,0.4)", display: "grid", placeItems: "center", fontFamily: F.poster, fontSize: 24, transform: `scale(${Math.min(st.skala, 1.6)})`, opacity: st.opacity > 0 ? 1 : 0, zIndex: 32 }}>{n}</div>
+  );
 };
