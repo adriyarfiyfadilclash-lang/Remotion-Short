@@ -1,9 +1,24 @@
 // MedicalExplainerScene (lapisan judul & subjudul) + MedicalCalloutLabel + AnatomyLeaderLine
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { loadFont } from "@remotion/google-fonts/Poppins";
+import { continueRender, delayRender, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 
-export const { fontFamily: FONT } = loadFont("normal", { weights: ["500", "700", "800"], subsets: ["latin"] });
+// Font Poppins disimpan lokal di public/font, jadi render tidak bergantung pada internet
+export const FONT = "Poppins";
+if (typeof document !== "undefined") {
+  const tunggu = delayRender("Memuat font Poppins");
+  Promise.all(
+    ["500", "700", "800"].map((w) =>
+      new FontFace(FONT, `url(${staticFile(`font/poppins-${w}.woff2`)}) format("woff2")`, { weight: w })
+        .load()
+        .then((f) => (document.fonts as unknown as Set<FontFace>).add(f)),
+    ),
+  )
+    .then(() => continueRender(tunggu))
+    .catch((e) => {
+      console.error(e);
+      continueRender(tunggu);
+    });
+}
 
 export const warnaTeks = (terang: boolean) => (terang ? "#0f172a" : "#ffffff");
 export const warnaAksen = (terang: boolean) => (terang ? "#d62839" : "#ffd166");
