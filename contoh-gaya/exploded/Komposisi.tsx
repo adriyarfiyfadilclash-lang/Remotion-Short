@@ -7,7 +7,7 @@ import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeom
 import { FONT } from "../../src/components/Teks";
 import {
   CahayaStudio, Catatan, DaftarBagian, JudulTeknis, Kam, Kanvas, KepalaTeknis, LatarCetakBiru, Penunjuk, Pose,
-  SumbuPutus, V3, geser, keLayar, useBongkar,
+  SumbuPutus, Tembus, V3, geser, keLayar, useBongkar,
 } from "./pustaka";
 import {
   BantalanBola, Bubut, Heliks, Kabel, Lilitan, Sekrup, SpiralDatar, teksturBaterai, teksturGrill, teksturLaminasi, teksturPCB,
@@ -380,16 +380,18 @@ const PemegangSikat: React.FC<{ sisi: 1 | -1; tarik: number }> = ({ sisi, tarik 
   </group>
 );
 
-const ASAL_M: V3[] = [[0, 0.98, 0], [0, 0.72, 0], [0, 1.18, 0], [0, 0.56, 0], [0, 0, 0], [0, 0, 0], [0, -0.02, 0], [0, -0.72, 0]];
-const ARAH_M: V3[] = [[0, 1.95, 0], [0, 1.3, 0], [0, 1.45, 0], [0, 0.85, 0], [0, 0.1, 0], [0, -0.65, 0], [0, -1.35, 0], [0, -2.0, 0]];
-const NAMA_M = ["Tutup & terminal", "Sikat karbon & pegas", "Bantalan belakang", "Komutator", "Rotor berlapis & lilitan", "Magnet permanen", "Rumah motor", "Bantalan depan"];
-const TITIK_M: V3[] = [[0.78, 0.02, 0], [-0.5, 0.08, 0], [0.12, 0.05, 0.1], [0.16, 0.0, 0.05], [0.52, 0.0, 0.0], [-0.72, 0.0, 0.2], [0.77, -0.25, 0.0], [0.14, 0.0, 0.08]];
+export const ASAL_M: V3[] = [[0, 0.98, 0], [0, 0.72, 0], [0, 1.18, 0], [0, 0.56, 0], [0, 0, 0], [0, 0, 0], [0, -0.02, 0], [0, -0.72, 0]];
+export const ARAH_M: V3[] = [[0, 1.95, 0], [0, 1.3, 0], [0, 1.45, 0], [0, 0.85, 0], [0, 0.1, 0], [0, -0.65, 0], [0, -1.35, 0], [0, -2.0, 0]];
+export const NAMA_M = ["Tutup & terminal", "Sikat karbon & pegas", "Bantalan belakang", "Komutator", "Rotor berlapis & lilitan", "Magnet permanen", "Rumah motor", "Bantalan depan"];
+export const TITIK_M: V3[] = [[0.78, 0.02, 0], [-0.5, 0.08, 0], [0.12, 0.05, 0.1], [0.16, 0.0, 0.05], [0.52, 0.0, 0.0], [-0.72, 0.0, 0.2], [0.77, -0.25, 0.0], [0.14, 0.0, 0.08]];
 
-const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
+export const Motor: React.FC<{ e: number; putar: number; tembus?: number[] }> = ({ e, putar, tembus }) => {
   const p = (i: number) => geser(ASAL_M[i], ARAH_M[i], e);
+  const t = (i: number) => tembus?.[i] ?? 1;
   return (
     <group>
       {/* 01 tutup belakang plastik + terminal kuningan + lubang bantalan */}
+      <Tembus o={t(0)}>
       <group position={p(0)}>
         <Bubut profil={[[0.12, -0.06], [0.78, -0.06], [0.8, -0.02], [0.8, 0.05], [0.72, 0.1], [0.25, 0.1], [0.22, 0.16], [0.12, 0.16]]}>
           <Plastik warna="#1f2730" kasar={0.5} />
@@ -411,14 +413,20 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           <Plastik warna="#e5edf4" />
         </mesh>
       </group>
+      </Tembus>
       {/* 02 sikat karbon, pemegang kuningan, pegas, kabel */}
+      <Tembus o={t(1)}>
       <group position={p(1)}>
         <PemegangSikat sisi={-1} tarik={0.3 * e} />
         <PemegangSikat sisi={1} tarik={0.3 * e} />
       </group>
+      </Tembus>
       {/* 03 bantalan belakang */}
+      <Tembus o={t(2)}>
       <BantalanBola p={p(2)} r={0.17} />
+      </Tembus>
       {/* 04 komutator: 3 segmen tembaga + celah isolator + kait kawat */}
+      <Tembus o={t(3)}>
       <group position={p(3)} rotation={[0, putar, 0]}>
         {[0, 1, 2].map((i) => {
           const a = (i * 2 * Math.PI) / 3;
@@ -440,7 +448,9 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           <Plastik warna="#3a2a1d" />
         </mesh>
       </group>
+      </Tembus>
       {/* 05 rotor: poros, 13 lempeng baja, lilitan tembaga di tiap kutub */}
+      <Tembus o={t(4)}>
       <group position={p(4)} rotation={[0, putar, 0]}>
         <mesh>
           <cylinderGeometry args={[0.062, 0.062, 2.5, 32]} />
@@ -456,7 +466,9 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           </group>
         ))}
       </group>
+      </Tembus>
       {/* 06 magnet permanen N (merah) & S (biru) */}
+      <Tembus o={t(5)}>
       <group position={p(5)}>
         <group position={[-0.45 * e, 0, 0]}>
           <SektorMagnet sudut={Math.PI} warna="#c0434f" />
@@ -465,7 +477,9 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           <SektorMagnet sudut={0} warna="#3f6fb3" />
         </group>
       </group>
+      </Tembus>
       {/* 07 rumah motor baja: kaleng, celah ventilasi, flens bertelinga, dudukan bantalan */}
+      <Tembus o={t(6)}>
       <group position={p(6)}>
         <mesh>
           <cylinderGeometry args={[0.78, 0.78, 1.2, 96, 1, true]} />
@@ -495,7 +509,9 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           </group>
         ))}
       </group>
+      </Tembus>
       {/* 08 bantalan depan + ring pengunci */}
+      <Tembus o={t(7)}>
       <group position={p(7)}>
         <BantalanBola r={0.17} />
         <mesh position={[0, -0.12, 0]} rotation={[Math.PI / 2, 0, 0]}>
@@ -503,6 +519,7 @@ const Motor: React.FC<{ e: number; putar: number }> = ({ e, putar }) => {
           <Logam warna="#2a3440" kasar={0.3} />
         </mesh>
       </group>
+      </Tembus>
     </group>
   );
 };

@@ -2,11 +2,11 @@
 // ExplodedComponent3D, ExplodedLightingRig3D, ShadowStage3D, AssemblyConnector3D, ComponentNumber3D,
 // ExplodedLabel3D, LeaderLine3D. Perubahan: format 9:16, pantulan lingkungan agar logam realistis,
 // label & daftar bagian 2D yang terbaca di HP. Semua deterministik.
-import React, { useMemo } from "react";
+import React, { useLayoutEffect, useMemo, useRef } from "react";
 import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import { Easing, interpolate, useCurrentFrame } from "remotion";
-import { Euler, Matrix4, PMREMGenerator, PerspectiveCamera, Vector3 } from "three";
+import { Euler, Group, Material, Matrix4, Mesh, PMREMGenerator, PerspectiveCamera, Vector3 } from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 export const W = 1080, H = 1920;
@@ -223,3 +223,34 @@ export const DaftarBagian: React.FC<{ isi: string[]; font: string }> = ({ isi, f
 export const Catatan: React.FC<{ teks: string; font: string }> = ({ teks, font }) => (
   <div style={{ position: "absolute", left: 0, right: 0, bottom: 55, textAlign: "center", fontFamily: font, fontSize: 21, color: "#6f8aa0", letterSpacing: 2 }}>{teks}</div>
 );
+
+// Mengatur tembus pandang seluruh isi grup (1 = padat, 0 = hilang) — dipakai saat kamera "masuk" ke dalam benda
+export const Tembus: React.FC<{ o: number; children: React.ReactNode }> = ({ o, children }) => {
+  const ref = useRef<Group>(null);
+  useLayoutEffect(() => {
+    ref.current?.traverse((obj) => {
+      const m = (obj as Mesh).material as Material | Material[] | undefined;
+      if (!m) return;
+      (Array.isArray(m) ? m : [m]).forEach((mm) => {
+        if (mm.userData.o0 === undefined) {
+          mm.userData.o0 = mm.opacity;
+          mm.userData.t0 = mm.transparent;
+          mm.userData.d0 = mm.depthWrite;
+        }
+        const tembus = o < 0.999;
+        mm.opacity = mm.userData.o0 * o;
+        const t = mm.userData.t0 || tembus;
+        if (mm.transparent !== t) {
+          mm.transparent = t;
+          mm.needsUpdate = true;
+        }
+        mm.depthWrite = tembus ? o > 0.6 && mm.userData.d0 : mm.userData.d0;
+      });
+    });
+  });
+  return (
+    <group ref={ref} visible={o > 0.01}>
+      {children}
+    </group>
+  );
+};
