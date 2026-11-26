@@ -29,4 +29,7 @@ Untuk wayang, legenda, epos, sejarah kerajaan, dan budaya Nusantara, WAJIB pakai
 ## Gaya baku kesembilan: ADRIY Documentary Motion
 Untuk dokumenter sinematik tentang peristiwa sejarah, bencana bersejarah, penjelajahan, dan tokoh, WAJIB pakai gaya di `docs/GAYA-ADRIY-DOCUMENTARY-MOTION.md`: satu foto arsip asli berstatus domain publik layar penuh dengan Ken Burns, color grade, efek film, judul bab, cap tanggal, lower third, subtitle, dan kredit. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/dokumenter/pustaka.tsx`.
 
+## Gaya baku kesepuluh: ADRIY Realistic 3D
+Untuk material dan benda nyata (logam, permata, kaca, es, air, produk), WAJIB pakai gaya di `docs/GAYA-ADRIY-REALISTIC-3D.md`: foto studio produk 3D dengan bahan PBR (IOR, dispersi, metalness), bayangan nyata, rim light sesuai tema, cahaya latar lembut, dan kartu spek kaca gelap. Kamera 9:16 memakai fov sekitar 40 dan jarak 10–12. Pemilik sudah menyetujuinya, jadi pertahankan persis. Pakai ulang `contoh-gaya/realistic/pustaka.tsx`.
+
 Pustaka gaya ADRIY lain ada di `.claude/skills/` dan hanya dipakai bila diminta.
